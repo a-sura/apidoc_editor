@@ -1,71 +1,107 @@
 # API Documentation Generator
 
-This Python program, built with the Streamlit library, allows you to generate API documentation from an OpenAPI (formerly Swagger) specification in JSON format. You can either upload a JSON file or paste the JSON text directly into the application.
+## Overview
+
+This Streamlit application generates API documentation from an OpenAPI specification (JSON format). It allows you to either upload a JSON file or paste the JSON content directly. The application then parses the OpenAPI schema and displays the documentation in a user-friendly format, and also generates a Docusaurus folder structure.
 
 ## Features
 
-* **Input Flexibility:** Supports uploading a JSON file or pasting JSON text.
-* **JSON Validation:** Checks if the provided input is valid JSON and displays an error message if it's not.
-* **Schema Display:** Shows the uploaded or pasted JSON schema in an editable text area.
-* **Dynamic Documentation Generation:** Parses the OpenAPI specification and generates human-readable documentation.
-* **Organized Output:** Documents are organized by tags, making it easy to navigate different API sections.
-* **Detailed Endpoint Information:** For each endpoint, it displays:
-    * Path and Summary
-    * HTTP Method
-    * Operation ID
-    * Description
-    * Parameters (as a table or JSON)
-    * Request Body (as JSON)
-    * Responses (as JSON)
-* **Expandable Sections:** Uses Streamlit expanders to keep the documentation concise and allow users to view details on demand.
-* **Styled Interface:** Includes custom CSS for improved readability and visual appeal.
+* **Input Flexibility**:
+    * Upload an OpenAPI JSON file.
+    * Paste OpenAPI JSON text.
+* **Real-time Preview**: Displays the generated API documentation based on the provided OpenAPI schema.
+* **Documentation Structure**:
+    * Organizes documentation by tags.
+    * Displays endpoints, methods, descriptions, parameters, request bodies, and responses.
+* **Docusaurus Output**: Generates a Docusaurus site folder structure, ready for deployment.
 
 ## How to Use
 
-1.  **Run the application:**
-    * Make sure you have Python and Streamlit installed. If not, you can install them using pip:
-        ```bash
-        pip install streamlit requests pandas
-        ```
-    * Save the Python code as a `.py` file (e.g., `api_doc_generator.py`).
-    * Run the application from your terminal:
-        ```bash
-        streamlit run api_doc_generator.py
-        ```
-    * The application will open in your web browser.
+1.  **Import API**:
+    * Choose either "Upload JSON File" or "Paste JSON Text".
+    * Upload your OpenAPI JSON file or paste the JSON content into the text area.
+    * The application will parse the JSON and display the documentation.
+2.  **View Documentation**:
+    * The documentation is displayed in a structured format, organized by tags.
+    * Expand each endpoint to view details such as method, operation ID, description, parameters, request body, and responses.
+3.  **Docusaurus Output**:
+    * The application generates a folder named `docusaurus-doc-site_YYYYMMDD_HHMMSS` (with a timestamp) in the current directory.
+    * This folder contains a basic Docusaurus site structure with your API documentation in Markdown files.
 
-2.  **Input your API Specification:**
-    * The application will present you with two options: "Upload JSON File" and "Paste JSON Text".
-    * **Upload JSON File:** Click on the "Browse files" button and select your OpenAPI specification file in JSON format.
-    * **Paste JSON Text:** Select the "Paste JSON Text" option and paste the content of your OpenAPI specification into the provided text area.
+## Docusaurus Integration
 
-3.  **View and Edit Schema (Optional):**
-    * Once the JSON is successfully uploaded or pasted, the application will display the schema in the left column under the "Schema Data" heading.
-    * You can edit the JSON directly in the text area. The application will validate the JSON as you type and display an error message if it's invalid.
-    * Editing the schema here will dynamically update the generated documentation in the right column.
+The application creates a Docusaurus website structure, placing your API documentation within the `docs` folder.  This allows you to quickly deploy your API documentation using Docusaurus.
 
-4.  **Explore the Documentation:**
-    * The right column, under the "Documentation" heading, will display the generated API documentation.
-    * The documentation is organized by the tags defined in your OpenAPI specification. Each tag will have its own section.
-    * Within each tag section, you'll find a list of API endpoints associated with that tag. Each endpoint is initially collapsed within an expander.
-    * Click on the expander to view the detailed information for a specific endpoint, including its method, operation ID, description, parameters, request body, and responses.
+## Requirements
 
-## Dependencies
+* Python 3.6+
+* Streamlit
+* Docusaurus (If you intend to use the generated output)
 
-* **streamlit:** For creating the web application interface.
-* **requests:** Although imported, it's not directly used in the current version of the code. It might be intended for future use, such as fetching the schema from a URL.
-* **pandas:** Used to display parameters in a tabular format (DataFrame) when applicable.
-* **json:** For handling JSON data (loading and parsing).
+## Installation
 
-## Customization
+1.  **Install Python Dependencies:**
 
-The look and feel of the application can be customized by modifying the CSS embedded within the `st.markdown` block at the beginning of the script. You can change colors, fonts, and other styles to match your preferences.
+    ```bash
+    pip install streamlit
+    ```
 
-## Potential Improvements
+## Running the Application
 
-* **Fetch from URL:** Allow users to input a URL to fetch the OpenAPI specification.
-* **Authentication Support:** Handle API specifications that require authentication to access.
-* **More Robust Error Handling:** Implement more specific error handling for different scenarios.
-* **Search Functionality:** Add a search bar to easily find specific endpoints or information within the documentation.
-* **Download Documentation:** Provide an option to download the generated documentation (e.g., as a PDF or Markdown file).
-* **Schema Validation against OpenAPI Standards:** Implement more rigorous validation to ensure the provided schema adheres to OpenAPI specifications.
+1.  **Run the Streamlit app:**
+
+    ```bash
+    streamlit run your_script_name.py
+    ```
+
+    Replace `your_script_name.py` with the name of your Python file.
+
+2.  **Access the App:**
+    Open your browser and navigate to the URL displayed in the terminal (usually `http://localhost:8501`).
+
+## Generated Docusaurus Structure
+
+The application generates the following Docusaurus folder structure:
+
+docusaurus-doc-site_YYYYMMDD_HHMMSS/├── blog/│   └── hello-world.md├── docs/│   ├── intro.md│   ├── tag_name_1.md  (Markdown files for each tag)│   ├── tag_name_2.md│   └── ...├── docusaurus.config.js├── sidebars.js├── src/│   └── pages/│       └── index.js└── static/└── img/
+* `docs/`: Contains the API documentation in Markdown files, organized by tags.
+* `blog/`:  Contains a sample blog post.
+* `src/pages/`: Contains the main page component.
+* `static/img/`:  Folder for static images.
+* `docusaurus.config.js`: Docusaurus configuration file.
+* `sidebars.js`: Docusaurus sidebar configuration.
+
+## Next Steps (Docusaurus Deployment)
+
+1.  **Navigate to the generated folder:**
+
+    ```bash
+    cd docusaurus-doc-site_YYYYMMDD_HHMMSS
+    ```
+
+2.  **Install Docusaurus dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Start the Docusaurus server:**
+
+    ```bash
+    npm run start
+    ```
+
+4.  **Build the Docusaurus site:**
+
+    ```bash
+    npm run build
+    ```
+
+5.  **Deploy the site:**
+    Follow the Docusaurus deployment instructions: https://docusaurus.io/docs/deployment
+
+## Notes
+
+* The application assumes that the input JSON follows the OpenAPI specification.
+* The generated Docusaurus site provides a basic structure. You may need to customize it further (e.g., configure the sidebar, theme, and navigation).
+* The application attempts to display parameters as a dataframe if possible, otherwise it displays them as JSON.
